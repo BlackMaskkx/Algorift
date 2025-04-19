@@ -1,0 +1,42 @@
+{
+  "name": "algorift-android-compiler",
+  "version": "1.0.0",
+  "description": "Backend para compilación de proyectos Android desde el IDE web",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'Building server...'",
+    "test": "jest --verbose",
+    "clean": "rm -rf temp/*"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "fs-extra": "^11.2.0",
+    "archiver": "^5.3.1",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "android",
+    "compiler",
+    "apk",
+    "ide"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}
