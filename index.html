@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorift IDE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="ide-container">
+        <!-- Barra de menú superior -->
+        <div class="menu-bar">
+            <div class="logo">Algorift</div>
+            <div class="menu-items">
+                <button id="new-project"><i class="material-icons">create_new_folder</i> Nuevo Proyecto</button>
+                <button id="open-project"><i class="material-icons">folder_open</i> Abrir</button>
+                <button id="save-project"><i class="material-icons">save</i> Guardar</button>
+                <div class="divider"></div>
+                <button id="build-btn"><i class="material-icons">build</i> Compilar</button>
+                <button id="run-btn"><i class="material-icons">play_arrow</i> Ejecutar</button>
+                <button id="export-btn"><i class="material-icons">get_app</i> Exportar APK</button>
+                <div class="divider"></div>
+                <button id="fullscreen-btn"><i class="material-icons">fullscreen</i> Pantalla completa</button>
+            </div>
+        </div>
+
+        <!-- Área principal de trabajo -->
+        <div class="main-area">
+            <!-- Panel lateral izquierdo -->
+            <div class="side-panel">
+                <div class="file-explorer">
+                    <div class="panel-header">
+                        <i class="material-icons">folder</i>
+                        <span>Explorador</span>
+                    </div>
+                    <div id="project-tree" class="tree-view"></div>
+                </div>
+            </div>
+
+            <!-- Editor central -->
+            <div class="editor-container">
+                <div class="tab-bar">
+                    <div class="tabs" id="editor-tabs"></div>
+                    <div class="tab-actions">
+                        <button id="close-tab"><i class="material-icons">close</i></button>
+                    </div>
+                </div>
+                <div id="code-editor" class="code-editor"></div>
+            </div>
+
+            <!-- Panel lateral derecho -->
+            <div class="right-panel">
+                <div class="panel-tabs">
+                    <button class="panel-tab active" data-panel="properties">Propiedades</button>
+                    <button class="panel-tab" data-panel="log">Log</button>
+                    <button class="panel-tab" data-panel="preview">Vista Previa</button>
+                </div>
+                <div class="panel-content" id="properties-panel">
+                    <div class="property-group">
+                        <h3>Configuración del Proyecto</h3>
+                        <div class="property-item">
+                            <label>Nombre del paquete:</label>
+                            <input type="text" id="package-name" value="com.example.myapp">
+                        </div>
+                        <div class="property-item">
+                            <label>Versión:</label>
+                            <input type="text" id="app-version" value="1.0">
+                        </div>
+                        <div class="property-item">
+                            <label>Versión SDK:</label>
+                            <select id="sdk-version">
+                                <option value="33">Android 13 (API 33)</option>
+                                <option value="32">Android 12L (API 32)</option>
+                                <option value="31">Android 12 (API 31)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-content hidden" id="log-panel">
+                    <div id="build-output" class="output-console"></div>
+                </div>
+                <div class="panel-content hidden" id="preview-panel">
+                    <iframe id="app-preview" class="app-preview"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de estado -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span id="current-file">Sin archivo abierto</span>
+            </div>
+            <div class="status-item">
+                <span id="cursor-position">Ln 1, Col 1</span>
+            </div>
+            <div class="status-item">
+                <span id="build-status">Listo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para nuevo proyecto -->
+    <div id="new-project-modal" class="modal">
+        <div class="modal-content">
+            <h2>Nuevo Proyecto</h2>
+            <div class="form-group">
+                <label>Nombre del proyecto:</label>
+                <input type="text" id="project-name" placeholder="MiApp">
+            </div>
+            <div class="form-group">
+                <label>Plantilla:</label>
+                <select id="project-template">
+                    <option value="empty">Actividad Vacía</option>
+                    <option value="basic">Actividad Básica</option>
+                    <option value="tabbed">Actividad con Pestañas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Lenguaje:</label>
+                <select id="project-language">
+                    <option value="java">Java</option>
+                    <option value="kotlin">Kotlin</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-project">Cancelar</button>
+                <button id="create-project">Crear</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src="script.js"></script>
+</body>
+                  </html>
