@@ -1,0 +1,43 @@
+#!/bin/bash
+# Este script descarga e instala AUTOMÁTICAMENTE las build-tools de Android SDK
+# Ejecútalo con: chmod +x setup-build-tools.sh && ./setup-build-tools.sh
+
+# Configuración
+ANDROID_HOME="$PWD/compiler/android"
+BUILD_TOOLS_VERSION="34.0.0"  # Cambia según tu necesidad
+CMD_TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip"
+
+# Crear estructura de directorios
+mkdir -p "$ANDROID_HOME/build-tools" "$ANDROID_HOME/licenses"
+
+# Descargar command-line tools
+echo "🔻 Descargando Android Command-Line Tools..."
+wget -q "$CMD_TOOLS_URL" -O cmdline-tools.zip
+unzip -q cmdline-tools.zip -d "$ANDROID_HOME"
+rm cmdline-tools.zip
+
+# Configurar variables de entorno temporales
+export ANDROID_HOME
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+
+# Aceptar licencias
+echo "📝 Aceptando licencias de Android SDK..."
+yes | sdkmanager --licenses > /dev/null
+
+# Instalar build-tools específicas
+echo "⚙️ Instalando build-tools $BUILD_TOOLS_VERSION..."
+sdkmanager "build-tools;$BUILD_TOOLS_VERSION" --sdk_root="$ANDROID_HOME"
+
+# Mover a la ubicación final
+mv "$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION" "$ANDROID_HOME/build-tools/"
+rm -rf "$ANDROID_HOME/cmdline-tools"
+
+# Dar permisos de ejecución
+echo "🔑 Otorgando permisos de ejecución..."
+chmod -R +x "$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION"
+
+# Resultado final
+echo -e "\n✅ Build-tools $BUILD_TOOLS_VERSION instaladas en:"
+echo "$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION"
+echo -e "\nHerramientas disponibles:"
+ls "$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION"
